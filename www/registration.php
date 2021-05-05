@@ -134,17 +134,19 @@ if(isset($_POST["sbmt"]))
 {
 	$cn=makeconnection();
 	$s="insert into donarregistration(name,gender,age,mobile,b_id,email,pwd,pic) values('" . $_POST["t1"] ."','" . $_POST["r1"] . "','" . $_POST["t2"] . "','" . $_POST["t3"] . "','" . $_POST["t4"] . "','" . $_POST["t5"] . "','" . $_POST["t6"] .  "','')";
-			echo "<p>$s</p>";
+			//echo "<p>$s</p>";
 	//$s="INSERT INTO donarregistration(name,gender,age,mobile,b_id,email,pswd,pic) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9])"
 	$s = mysqli_query($cn,$s);
-	mysqli_close($cn);
+	
 	if($s>0)
 	{
-	echo "<script>alert('Record Save');</script>";
+	 echo "<script>alert('Record Save');</script>";
 	}
-	else
-	{echo "<script>alert('".mysql_error($s)."');</script>";
-	}	
+	else{
+         $err = mysqli_error($cn);
+         echo "<script>alert('".addslashes($err)."');</script>";
+	}
+	mysqli_close($cn);	
 		
 }
 ?> 
